@@ -37,11 +37,11 @@ authRoute.post("/login", async (req, res) => {
 });
 
 authRoute.post("/register", async (req, res) => {
-  const { name, email, password, phone } = req.body;
-  if (!name || !email || !password || !phone) {
-    res.status(400).send({ message: "All fields required!" });
-  }
   try {
+    const { name, email, password, phone } = req.body;
+    if (!name || !email || !password || !phone) {
+      res.status(400).send({ message: "All fields required!" });
+    }
     const ifRepeatedEmail = await User.findOne({ email });
     if (ifRepeatedEmail) {
       res.status(400).send({ message: "Email has been used" });
